@@ -24,7 +24,10 @@ class StoreRouteRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'string', 'min:5'],
+            'description' => ['required', 'string', 'min:10'],
+            'driver_id' => ['required',],
+            'vehicle_id' => ['required',],
         ];
     }
 }
