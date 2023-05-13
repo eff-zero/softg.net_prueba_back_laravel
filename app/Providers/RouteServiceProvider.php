@@ -71,6 +71,8 @@ class RouteServiceProvider extends ServiceProvider
                 require(base_path('app/Modules/UserModule/routes/api.php'));
                 require(base_path('app/Modules/DriverModule/routes/api.php'));
                 require(base_path('app/Modules/VehicleModule/routes/api.php'));
+                require(base_path('app/Modules/RouteModule/routes/api.php'));
+
             });
     }
 }
