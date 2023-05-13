@@ -9,9 +9,16 @@ use Illuminate\Routing\Controller as BaseController;
 
 /**
  * @OA\Info(
- *    title="Laravel API - Soft-G.nte", 
+ *    title="Laravel API - Soft-G.net", 
  *    version="1.0"
- *  )
+ * )
+ *
+ * 
+ * @OA\Server(
+ *          description="development server",
+ *          url="http://localhost:8000/api"
+ *      )
+ *      
  */
 
 class Controller extends BaseController

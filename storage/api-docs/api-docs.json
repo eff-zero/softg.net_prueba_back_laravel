@@ -1,9 +1,15 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Laravel API - Soft-G.nte",
+        "title": "Laravel API - Soft-G.net",
         "version": "1.0"
     },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "development server"
+        }
+    ],
     "paths": {
         "/login": {
             "post": {
@@ -125,6 +131,16 @@
                         "bearerAuth": []
                     }
                 ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
             }
         }
     }
