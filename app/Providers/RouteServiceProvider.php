@@ -61,6 +61,7 @@ class RouteServiceProvider extends ServiceProvider
         });
     }
 
+
     protected function mapApiModuleRoutes()
     {
         Route::prefix('api')
@@ -68,7 +69,7 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->moduleNamespace)
             ->group(function () {
                 require(base_path('app/Modules/UserModule/routes/api.php'));
-                // require(base_path('app/Modules/ParameterValueModule/routes/api.php'));
+                require(base_path('app/Modules/DriverModule/routes/api.php'));
             });
     }
 }
