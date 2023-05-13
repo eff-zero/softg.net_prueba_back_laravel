@@ -70,6 +70,7 @@ class RouteServiceProvider extends ServiceProvider
             ->group(function () {
                 require(base_path('app/Modules/UserModule/routes/api.php'));
                 require(base_path('app/Modules/DriverModule/routes/api.php'));
+                require(base_path('app/Modules/VehicleModule/routes/api.php'));
             });
     }
 }
