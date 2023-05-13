@@ -36,7 +36,12 @@ class Vehicle extends Model implements VehicleInterface
 
     public function updateVehicle(array $data, int $id): ?Vehicle
     {
-        return $this::find($id)->update($data);
+        $vehicle = $this::find($id);
+        if (!$vehicle) {
+            return null;
+        }
+        $vehicle->update($data);
+        return $vehicle;
     }
 
     public function deleteVehicle(int $id): ?Vehicle
