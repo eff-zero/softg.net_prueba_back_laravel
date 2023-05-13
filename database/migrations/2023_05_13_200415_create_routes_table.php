@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('routes', function (Blueprint $table) {
             $table->id();
+            $table->string('description');
+            $table->foreignId('driver_id')->references('id')->on('users');
+            $table->foreignId('vehicle_id')->references('id')->on('vehicles');
+            $table->boolean('active')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
