@@ -13,7 +13,7 @@ class StoreVehicleRequest extends BaseFormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class StoreVehicleRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            //
+            'description' => ['required', 'string'],
+            'year' => ['required', 'digits:4', 'integer', 'min:1900', 'max:' . (date('Y') + 1),],
+            'mark' => ['required', 'string'],
+            'capacity' => ['required', 'numeric'],
+            'active' => [],
         ];
     }
 }

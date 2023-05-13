@@ -2,64 +2,72 @@
 
 namespace App\Modules\VehicleModule\controllers;
 
+use App\Helpers\RestActions;
 use App\Http\Controllers\Controller;
 use App\Modules\VehicleModule\validations\StoreVehicleRequest;
 use App\Modules\VehicleModule\validations\UpdateVehicleRequest;
+use App\Modules\VehicleModule\Vehicle;
+use PhpParser\Node\Stmt\TryCatch;
 
 class VehicleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    use RestActions;
+
+    protected Vehicle $VehicleModel;
+
+    public function __construct()
+    {
+        $this->VehicleModel =  new Vehicle();
+    }
+
+
     public function index()
     {
-        //
+        try {
+        } catch (\Throwable $e) {
+            return $this->respondJson('server_error', [], $e->getMessage(), '');
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreVehicleRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(StoreVehicleRequest $request)
     {
-        //
+        try {
+            $data =  $request->all();
+            $vehicle = $this->VehicleModel->saveVehicle($data);
+            return $this->respondJson('created', $vehicle, null, 'Vehículo creado');
+        } catch (\Throwable $e) {
+            return $this->respondJson('server_error', [], $e->getMessage(), '');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(int $id)
     {
-        //
+        try {
+            //code...
+        } catch (\Throwable $e) {
+            return $this->respondJson('server_error', [], $e->getMessage(), '');
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateVehicleRequest  $request
-     * @param  \App\Models\Vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(UpdateVehicleRequest $request, int $id)
     {
-        //
+        try {
+            //code...
+        } catch (\Throwable $e) {
+            return $this->respondJson('server_error', [], $e->getMessage(), '');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(int $id)
     {
-        //
+        try {
+            //code...
+        } catch (\Throwable $e) {
+            return $this->respondJson('server_error', [], $e->getMessage(), '');
+        }
     }
 }

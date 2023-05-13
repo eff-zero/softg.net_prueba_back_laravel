@@ -10,6 +10,15 @@ class Vehicle extends Model implements VehicleInterface
 {
     use SoftDeletes, HasFactory;
 
+    protected $guarded = [];
+    protected $hidden =
+    [
+        'active',
+        'deleted_at',
+        'created_at',
+        'updated_at'
+    ];
+
     public function saveVehicle(array $data): Vehicle
     {
         return $this::create($data);
