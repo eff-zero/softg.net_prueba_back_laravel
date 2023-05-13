@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -22,9 +23,16 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             [
-                'name' => 'Jesús Hernández',
+                'first_name' => 'Jesús',
+                'last_name' => 'Hernández',
                 'email' => 'jesus@correo.com',
                 'password' => Hash::make('12345678'),
+                'dob' => '1997-09-18',
+                'address' => 'Calle 99 #99-99',
+                'city' => 'Barranquilla',
+                'zip' => '000000',
+                'phone' => '3000000000',
+                'active' => true,
                 'created_at' => now(),
                 'updated_at' => now()
             ],

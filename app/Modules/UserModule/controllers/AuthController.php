@@ -19,7 +19,6 @@ class AuthController extends Controller
         $this->UserModel = new User();
     }
 
-
     /**
      * @OA\Post(
      *     path="/login",
@@ -58,8 +57,8 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (!auth()->attempt($credentials)) {
-            return $this->respondJson('unauthorized', [], null, 'Credenciales invalidas.');
+        if (!auth()->attempt($credentials) || !auth()->user()->active) {
+            return $this->respondJson('unauthorized', [], null, 'Credenciales invalidas');
         }
 
         $user = auth()->user();
