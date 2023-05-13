@@ -2,9 +2,10 @@
 
 namespace App\Modules\DriverModule\validations;
 
+use App\Http\Requests\BaseFormRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreDriverRequest extends FormRequest
+class StoreDriverRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class StoreDriverRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,16 @@ class StoreDriverRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'first_name' => ['required', 'string'],
+            'last_name' => ['required', 'string'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string', 'min:8'],
+            'ssn' => ['required', 'numeric'],
+            'dob' => ['required', 'date'],
+            'address' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'zip' => ['required', 'string'],
+            'phone' => ['required', 'unique:users', 'numeric', 'digits:10'],
         ];
     }
 }
