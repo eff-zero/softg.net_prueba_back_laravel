@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Modules\VehicleModule\validations\StoreVehicleRequest;
 use App\Modules\VehicleModule\validations\UpdateVehicleRequest;
 use App\Modules\VehicleModule\Vehicle;
+use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\TryCatch;
 
 class VehicleController extends Controller
@@ -24,12 +25,14 @@ class VehicleController extends Controller
     public function index()
     {
         try {
+            $vehicles =  $this->VehicleModel->getVehicles();
+            return $this->respondJson('done', $vehicles);
         } catch (\Throwable $e) {
             return $this->respondJson('server_error', [], $e->getMessage(), '');
         }
     }
 
-    
+
     public function store(StoreVehicleRequest $request)
     {
         try {
@@ -45,7 +48,11 @@ class VehicleController extends Controller
     public function show(int $id)
     {
         try {
-            //code...
+            $vehicle = $this->VehicleModel->getVehicle($id);
+            if (!$vehicle) {
+                return $this->respondJson('not_found');
+            }
+            return $this->respondJson('done', $vehicle);
         } catch (\Throwable $e) {
             return $this->respondJson('server_error', [], $e->getMessage(), '');
         }
@@ -65,9 +72,13 @@ class VehicleController extends Controller
     public function destroy(int $id)
     {
         try {
-            //code...
+            $result =  $this->VehicleModel->deleteVehicle($id);
+            if (!$result) {
+                return $this->respondJson('not_found', [], null, 'Vehículo no encontrado');
+            }
+            return $this->respondJson('done', $result, null, 'Vehículo eliminado con exito');
         } catch (\Throwable $e) {
-            return $this->respondJson('server_error', [], $e->getMessage(), '');
+            return $this->respondJson('server_error', [], $e->getMessage(), 'Error al eliminar vehículo');
         }
     }
 }

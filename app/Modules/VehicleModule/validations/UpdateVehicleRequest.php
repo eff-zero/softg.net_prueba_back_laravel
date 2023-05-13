@@ -13,7 +13,7 @@ class UpdateVehicleRequest extends BaseFormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
