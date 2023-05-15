@@ -12,6 +12,44 @@
     ],
     "paths": {
         "/drivers": {
+            "get": {
+                "tags": [
+                    "Drivers"
+                ],
+                "summary": "Obtener conductores",
+                "description": "Obtiene la lista de todos los conductores",
+                "operationId": "getDrivers",
+                "responses": {
+                    "200": {
+                        "description": "Lista de conductores obtenida exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "done"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Lista de conductores obtenida exitosamente"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error al obtener conductores"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "Drivers"
@@ -39,40 +77,50 @@
                                 ],
                                 "properties": {
                                     "first_name": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "example": "Jesus"
                                     },
                                     "last_name": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "example": ""
                                     },
                                     "email": {
                                         "type": "string",
-                                        "format": "email"
+                                        "format": "email",
+                                        "example": ""
                                     },
                                     "password": {
                                         "type": "string",
                                         "format": "password",
-                                        "minLength": 8
+                                        "minLength": 8,
+                                        "example": ""
                                     },
                                     "ssn": {
                                         "type": "integer",
-                                        "format": "int64"
+                                        "format": "int64",
+                                        "example": ""
                                     },
                                     "dob": {
                                         "type": "string",
-                                        "format": "date"
+                                        "format": "date",
+                                        "example": ""
                                     },
                                     "address": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "example": ""
                                     },
                                     "city": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "example": ""
                                     },
                                     "zip": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "example": ""
                                     },
                                     "phone": {
                                         "type": "integer",
-                                        "format": "int64"
+                                        "format": "int64",
+                                        "example": ""
                                     }
                                 },
                                 "type": "object"
@@ -138,7 +186,280 @@
                 },
                 "security": [
                     {
-                        "bearerAuth": []
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/drivers/{id}": {
+            "get": {
+                "tags": [
+                    "Drivers"
+                ],
+                "summary": "Obtener información de un conductor",
+                "description": "Obtiene la información de un conductor específico mediante su ID",
+                "operationId": "getDriverById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del conductor a buscar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Información del conductor"
+                    },
+                    "404": {
+                        "description": "El conductor no fue encontrado"
+                    },
+                    "500": {
+                        "description": "Error interno del servidor"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Drivers"
+                ],
+                "summary": "Actualizar conductor",
+                "description": "Actualiza los datos de un conductor existente",
+                "operationId": "updateDriver",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del conductor a actualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Los datos del conductor a actualizar",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "ssn": {
+                                        "type": "string"
+                                    },
+                                    "dob": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "city": {
+                                        "type": "string"
+                                    },
+                                    "zip": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "El conductor ha sido actualizado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "done"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": "{first_name: 'John', last_name: 'Doe', email: 'john.doe@example.com', ssn: '123-45-6789', dob: '1980-01-01', address: '123 Main St', city: 'Anytown', zip: '12345', phone: '555-1234'}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No se encontró el conductor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "not_found"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Conductor no encontrado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error al actualizar el conductor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "server_error"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error al actualizar conductor"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Error message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Drivers"
+                ],
+                "summary": "Eliminar conductor",
+                "description": "Elimina un conductor por su ID",
+                "operationId": "deleteDriver",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del conductor a eliminar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Conductor eliminado correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "done"
+                                        },
+                                        "data": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Conductor eliminado correctamente"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No se encontró el conductor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "not_found"
+                                        },
+                                        "data": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No se encontró el conductor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error al eliminar conductor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "server_error"
+                                        },
+                                        "data": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error al eliminar conductor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
                     }
                 ]
             }
@@ -164,12 +485,12 @@
                                     "email": {
                                         "type": "string",
                                         "format": "email",
-                                        "example": "user@example.com"
+                                        "example": "jesus@correo.com"
                                     },
                                     "password": {
                                         "type": "string",
                                         "format": "password",
-                                        "example": "secret"
+                                        "example": "12345678"
                                     }
                                 },
                                 "type": "object"
@@ -260,95 +581,7 @@
                 },
                 "security": [
                     {
-                        "bearerAuth": []
-                    }
-                ]
-            }
-        },
-        "/vehicles": {
-            "post": {
-                "tags": [
-                    "Vehículos"
-                ],
-                "summary": "Crea un nuevo vehículo",
-                "description": "Crea un nuevo vehículo con los datos proporcionados",
-                "operationId": "664a0b62cb743db21ef79e32367001f4",
-                "parameters": [
-                    {
-                        "name": "description",
-                        "in": "query",
-                        "description": "Descripción del vehículo",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "year",
-                        "in": "query",
-                        "description": "Año del vehículo (formato: YYYY)",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "date",
-                            "example": "2022"
-                        }
-                    },
-                    {
-                        "name": "mark",
-                        "in": "query",
-                        "description": "Marca del vehículo",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "capacity",
-                        "in": "query",
-                        "description": "Capacidad del vehículo",
-                        "required": true,
-                        "schema": {
-                            "type": "number",
-                            "format": "float",
-                            "example": "2.5"
-                        }
-                    },
-                    {
-                        "name": "active",
-                        "in": "query",
-                        "description": "Indica si el vehículo está activo o no",
-                        "required": false,
-                        "schema": {
-                            "type": "boolean",
-                            "example": "true"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Vehículo creado exitosamente"
-                    },
-                    "500": {
-                        "description": "Error interno del servidor",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Internal server error"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
+                        "sanctum": []
                     }
                 ]
             }
@@ -358,7 +591,7 @@
         "securitySchemes": {
             "sanctum": {
                 "type": "apiKey",
-                "description": "Enter token in format (Bearer <token>)",
+                "description": "Enter token in format (Bearer <token_here>)",
                 "name": "Authorization",
                 "in": "header"
             }

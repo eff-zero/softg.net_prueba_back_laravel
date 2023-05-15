@@ -29,7 +29,7 @@ class UpdateDriverRequest extends BaseFormRequest
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
             'email' => ['required', 'email'],
-            'password' => ['required', 'string', 'min:8'],
+            'password' => [],
             'ssn' => ['required', 'numeric'],
             'dob' => ['required', 'date'],
             'address' => ['required', 'string'],

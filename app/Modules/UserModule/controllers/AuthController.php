@@ -29,8 +29,8 @@ class AuthController extends Controller
      *         description="User credentials",
      *         @OA\JsonContent(
      *             required={"email","password"},
-     *             @OA\Property(property="email", type="string", format="email", example="user@example.com"),
-     *             @OA\Property(property="password", type="string", format="password", example="secret"),
+     *             @OA\Property(property="email", type="string", format="email", example="jesus@correo.com"),
+     *             @OA\Property(property="password", type="string", format="password", example="12345678"),
      *         ),
      *     ),
      *     @OA\Response(
@@ -72,7 +72,7 @@ class AuthController extends Controller
      *     path="/logout",
      *     summary="Log out user",
      *     tags={"Authentication"},
-     *     security={{"bearerAuth":{}}},
+     *     security={{"sanctum":{}}},
      *     @OA\Response(
      *         response="200",
      *         description="Successful logout",
@@ -82,7 +82,8 @@ class AuthController extends Controller
      *             @OA\Property(property="message", type="string", example="Sesión cerrada exitosamente"),
      *         ),
      *     ),
-     * )
+     * ),
+     * 
      */
     public function logout()
     {
