@@ -35,42 +35,6 @@ Podemos acceder a la siguiente ruta para ver la documentación del proyecto: [do
 2. Ahora autorizamos todas nuestras peticiones HTTP con el token con el siguiente formato [ver imagén](https://ppolyzos.com/wp-content/uploads/2017/10/jwt-support-authorize-bearer.png).
 3. Una vez autorizado, podemos probar la API .
 
-# Laravel API - Prueba Junior SoftG.net
-
-Proyecto desarollado en Laravel con fines de pruebas para el cargo del desarrollador Junior. El proyecto consiste en un _API RESTFUL_ cuyo objetivo es el manejo, registro y control de flotas, conductores y cronogramas de rutas de trabajo por semana.
-
-## Instalación
-
--   Version de php: 8.0.2.
--   Version de Laravel: 9.19.
-
-Crear un archivo llamado _.env_ basado en el archivo _.env.example_ para el manejo de nuestras variables de entorno. Conexión a base de datos y demás.
-
-Posteriomente, ejecutar:
-
-```bash
-php composer install
-```
-
-Luego de instalada las depencias y con nuestro _.env_ ya creado, procedemos a ejecutar el siguiente comando para correr la migraciones en bases de datos y carga algunos datos en esta:
-
-```bash
-php artisan migrate --seed
-```
-
-Finalmente ponemos en marcha nuestro servidor con:
-
-```bash
-php artisan serve
-```
-
-## Uso
-
-Podemos acceder a la siguiente ruta para ver la documentación del proyecto: [documentación](http://localhost:8000/api/documentation) o a _http://localhost:8000/api/documentación_.
-
-1. Hacemos _login_ y copiamos el token que nos brinda la respuesta del _endpoint_.
-2. Ahora autorizamos todas nuestras peticiones HTTP con el token con el siguiente formato [ver imagén](https://ppolyzos.com/wp-content/uploads/2017/10/jwt-support-authorize-bearer.png).
-3. Una vez autorizado, podemos probar la API .
 
 <!-- <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
