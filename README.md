@@ -35,6 +35,13 @@ Podemos acceder a la siguiente ruta para ver la documentación del proyecto: [do
 2. Ahora autorizamos todas nuestras peticiones HTTP con el token con el siguiente formato [ver imagén](https://ppolyzos.com/wp-content/uploads/2017/10/jwt-support-authorize-bearer.png).
 3. Una vez autorizado, podemos probar la API .
 
+En caso de tener errores con el cargue de los _endpoints_ del API. Por favor ejecutar el seiguiente comando:
+
+```bash
+php artisan route:clear
+php artisan route:cache
+```
+
 
 <!-- <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 

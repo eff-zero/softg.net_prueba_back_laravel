@@ -33,6 +33,22 @@ class UserSeeder extends Seeder
                 'zip' => '000000',
                 'phone' => '3000000000',
                 'active' => true,
+                'ssn' => null,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'first_name' => 'Conductor',
+                'last_name' => 'Driver',
+                'email' => 'conductor@correo.com',
+                'password' => Hash::make('12345678'),
+                'dob' => '1990-09-18',
+                'address' => 'Calle 99 #99-99',
+                'city' => 'Bogota',
+                'zip' => '000000',
+                'phone' => '3000000001',
+                'active' => true,
+                'ssn' => 12121212,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
