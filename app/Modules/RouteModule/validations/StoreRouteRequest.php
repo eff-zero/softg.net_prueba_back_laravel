@@ -3,6 +3,8 @@
 namespace App\Modules\RouteModule\validations;
 
 use App\Http\Requests\BaseFormRequest;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Validation\Rule;
 
 class StoreRouteRequest extends BaseFormRequest
 {
@@ -26,8 +28,8 @@ class StoreRouteRequest extends BaseFormRequest
         return [
             'name' => ['required', 'string', 'min:5'],
             'description' => ['required', 'string', 'min:10'],
-            'driver_id' => ['required',],
-            'vehicle_id' => ['required',],
+            'driver_id' => ['required', Rule::exists('users', 'id')->whereNotNull('ssn')->whereNotNull('deleted_at')],
+            'vehicle_id' => ['required', Rule::exists('vehicles', 'id')->where('active', 1)->whereNotNull('deleted_at')],
         ];
     }
 }

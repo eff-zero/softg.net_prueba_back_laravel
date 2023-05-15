@@ -464,6 +464,350 @@
                 ]
             }
         },
+        "/routes": {
+            "get": {
+                "tags": [
+                    "Routes"
+                ],
+                "summary": "Obtiene una lista de todas las rutas",
+                "operationId": "58dcabf1ac0815a81f452e4952c1d6e2",
+                "responses": {
+                    "200": {
+                        "description": "Lista de rutas obtenidas exitosamente"
+                    },
+                    "500": {
+                        "description": "Error al obtener la lista de rutas"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Routes"
+                ],
+                "summary": "Crear una nueva ruta",
+                "operationId": "965921884993e09dfc4c968d03771184",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Ruta 1"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Descripción de la Ruta 1"
+                                    },
+                                    "driver_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "vehicle_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Ruta creada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "created"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ruta creada"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "No autorizado"
+                    },
+                    "422": {
+                        "description": "Datos de entrada invalidos"
+                    },
+                    "500": {
+                        "description": "Error interno del servidor"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/routes/{id}": {
+            "get": {
+                "tags": [
+                    "Routes"
+                ],
+                "summary": "Get a specific route",
+                "description": "Get the details of a specific route.",
+                "operationId": "getRouteById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the route to get.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Route not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Route not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error a crear ruta"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Routes"
+                ],
+                "summary": "Update an existing route",
+                "description": "Update an existing route in the system with the specified ID using the data provided in the request.",
+                "operationId": "updateRoute",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the route to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data for the route update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "driver_id": {
+                                        "type": "integer"
+                                    },
+                                    "vehicle_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Route updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "done"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ruta actualizada"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Route not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "not_found"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Ruta no encontrada"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "server_error"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error al actualizar ruta"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Routes"
+                ],
+                "summary": "Eliminar una ruta",
+                "description": "Eliminar una ruta",
+                "operationId": "deleteRoute",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la ruta a eliminar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ruta eliminada con éxito",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "description": "Objeto que contiene información sobre la ruta eliminada",
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Ruta no encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "Mensaje de error indicando que la ruta no fue encontrada",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error al eliminar la ruta",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "Mensaje de error indicando que hubo un problema al eliminar la ruta",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/login": {
             "post": {
                 "tags": [

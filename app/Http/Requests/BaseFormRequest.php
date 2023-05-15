@@ -4,13 +4,14 @@ namespace App\Http\Requests;
 
 use App\Helpers\RestActions;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 
 class BaseFormRequest extends FormRequest
 {
-    use RestActions;
+    use RestActions, SoftDeletes;
     /**
      * Determine if the user is authorized to make this request.
      *
